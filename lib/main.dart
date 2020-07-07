@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_begginer_course/exampleDartLang.dart';
 
 void main() {
-  runApp(MyApp()
-      //main2()
-      );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
