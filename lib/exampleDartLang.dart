@@ -1,5 +1,4 @@
 void main() {
-  //runApp(MyApp());
   int x = 23;
   print(x);
   String name = "Cristian";
