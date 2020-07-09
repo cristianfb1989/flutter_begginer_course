@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_begginer_course/screen2.dart';
+import 'package:flutter_begginer_course/screen3.dart';
 
 void main() {
-  runApp(
-      MaterialApp(debugShowCheckedModeBanner: false, home: MyStafulWidget()));
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyStafulWidget(),
+    theme: ThemeData(
+        primaryColor: Colors.red,
+        accentColor: Colors.lime,
+        brightness: Brightness.dark),
+    routes: <String, WidgetBuilder>{
+      "/screen2": (BuildContext context) => Screen2(),
+      "/screen3": (BuildContext context) => Screen3(),
+    },
+  ));
   //runApp(MyStatelessWidget());
   // runApp(Container(
   //     color: Colors.red,
@@ -31,6 +43,8 @@ class MyStafulWidget extends StatefulWidget {
 }
 
 class _MyStafulWidgetState extends State<MyStafulWidget> {
+  bool checkInput = false;
+  int gender = 1;
   var myColor = Colors.red;
   changeColor() {
     setState(() {
@@ -53,6 +67,11 @@ class _MyStafulWidgetState extends State<MyStafulWidget> {
                   icon: Icon(Icons.map),
                   onPressed: () {
                     print("Icon");
+                  }),
+              IconButton(
+                  icon: Icon(Icons.arrow_forward),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/screen2');
                   })
             ]),
         drawer: Drawer(
@@ -95,7 +114,52 @@ class _MyStafulWidgetState extends State<MyStafulWidget> {
                 title: Text("Hello there"),
                 onTap: () {}),
           ])
-        ])));
+        ])),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              print("FAB");
+            },
+            child: Icon(Icons.add)),
+        body: Column(children: <Widget>[
+          Text("Body", textDirection: TextDirection.ltr),
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.person), hintText: "Username"),
+                  onChanged: (input) {
+                    print(input);
+                  })),
+          Checkbox(
+              value: checkInput,
+              onChanged: (bool value) {
+                print(value);
+                setState(() {
+                  checkInput = value;
+                });
+              }),
+          ButtonBar(children: <Widget>[
+            Radio(
+                value: 1,
+                groupValue: gender,
+                onChanged: (int value) {
+                  setState(() {
+                    gender = value;
+                    print(gender);
+                  });
+                }),
+            Radio(
+                value: 2,
+                groupValue: gender,
+                onChanged: (int value) {
+                  setState(() {
+                    gender = value;
+                    print(gender);
+                  });
+                })
+          ])
+        ]));
+
     // return Padding(
     //     padding: EdgeInsets.only(top: 40, left: 8, right: 8),
     //     // padding: EdgeInsets.all(8.0),
