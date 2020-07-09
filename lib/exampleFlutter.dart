@@ -43,6 +43,7 @@ class MyStafulWidget extends StatefulWidget {
 }
 
 class _MyStafulWidgetState extends State<MyStafulWidget> {
+  List list = List();
   bool checkInput = false;
   int gender = 1;
   var myColor = Colors.red;
@@ -50,6 +51,18 @@ class _MyStafulWidgetState extends State<MyStafulWidget> {
     setState(() {
       myColor = Colors.blue;
     });
+  }
+
+  String input = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    list.add("nr. 1");
+    list.add("nr. 2");
+    list.add("nr. 3");
+    list.add("nr. 4");
   }
 
   @override
@@ -117,7 +130,25 @@ class _MyStafulWidgetState extends State<MyStafulWidget> {
         ])),
         floatingActionButton: FloatingActionButton(
             onPressed: () {
-              print("FAB");
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                        title: Text("Add item"),
+                        content: TextField(onChanged: (String value) {
+                          input = value;
+                        }),
+                        actions: <Widget>[
+                          FlatButton(
+                              onPressed: () {
+                                setState(() {
+                                  list.add(input);
+                                });
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Add"))
+                        ]);
+                  });
             },
             child: Icon(Icons.add)),
         body: Column(children: <Widget>[
@@ -157,7 +188,19 @@ class _MyStafulWidgetState extends State<MyStafulWidget> {
                     print(gender);
                   });
                 })
-          ])
+          ]),
+          ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                return Dismissible(
+                    key: Key(index.toString()),
+                    child: ListTile(title: Text(list[index])),
+                    onDismissed: (direction) {
+                      setState(() {
+                        list.removeAt(index);
+                      });
+                    });
+              })
         ]));
 
     // return Padding(
