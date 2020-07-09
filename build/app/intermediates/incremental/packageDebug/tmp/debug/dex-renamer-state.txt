@@ -1,4 +1,0 @@
-#Tue Jul 07 14:03:06 ART 2020
-base.0=D\:\\MEGA\\Flutter\\Flutter Beginner Tutorial - Build own App\\flutter_begginer_course\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
